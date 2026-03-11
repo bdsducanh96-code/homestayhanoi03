@@ -1,262 +1,65 @@
-<!DOCTYPE html>
-<html lang="vi">
-
-<!-- ========================
-BLOCK 1: CẤU HÌNH TRANG
-========================= -->
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Đặt phòng Homestay Hà Nội</title>
-
-<style>
-
-/* =========================
-BLOCK 2: CSS GIAO DIỆN
-========================= */
-
-body{
-font-family: Arial;
-background:#f7f7f7;
-margin:0;
-padding:0;
-}
-
-.container{
-max-width:420px;
-margin:auto;
-padding:20px;
-margin-top:30px;
-}
-
-.card{
-background:white;
-padding:25px;
-border-radius:16px;
-box-shadow:0 10px 25px rgba(0,0,0,0.08);
-}
-
-h1{
-font-size:22px;
-text-align:center;
-margin-bottom:20px;
-}
-
-label{
-display:block;
-margin-top:12px;
-font-weight:bold;
-}
-
-input,select{
-width:100%;
-padding:12px;
-margin-top:6px;
-border-radius:10px;
-border:1px solid #ddd;
-font-size:16px;
-}
-
-button{
-width:100%;
-margin-top:15px;
-padding:15px;
-border:none;
-border-radius:12px;
-background:#ff385c;
-color:white;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-}
-
-.result{
-margin-top:15px;
-text-align:center;
-font-weight:bold;
-}
-
-textarea{
-width:100%;
-height:120px;
-margin-top:10px;
-border-radius:10px;
-padding:10px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="card">
-
-<h1>Đặt phòng Homestay Hà Nội</h1>
-
 <!-- =========================
-BLOCK 3: FORM NHẬP THÔNG TIN
+BLOCK 1: HERO BANNER
+Ảnh lớn giới thiệu homestay
 ========================= -->
 
-<form id="bookingForm">
+<div class="hero">
 
-<label>Tên khách</label>
-<input type="text" id="ten" required>
+<img src="assets/images/homestay-hero.jpg" alt="Homestay Hà Nội">
 
-<label>Check-in</label>
-<input type="date" id="checkin" required>
-
-<label>Check-out</label>
-<input type="date" id="checkout" required>
-
-<label>Số khách</label>
-
-<select id="khach">
-<option>1</option>
-<option>2</option>
-<option>3</option>
-<option>4</option>
-<option>5</option>
-</select>
-
-<!-- nơi hiển thị kết quả -->
-<div class="result" id="ketqua"></div>
-
-<button type="submit">Kiểm tra phòng</button>
-
-</form>
-
-</div>
+<div class="hero-text">
+<h1>Homestay nghỉ dưỡng Sóc Sơn</h1>
+<p>Không gian riêng tư – view rừng – gần Hà Nội</p>
 </div>
 
-<script>
+</div>
+<!-- =========================
+BLOCK 2: GALLERY ẢNH HOMESTAY
+========================= -->
 
-/* =========================
-BLOCK 4: CẤU HÌNH HỆ THỐNG
-========================= */
+<div class="gallery">
 
-// API lưu dữ liệu vào Google Sheet
-const API_URL="https://script.google.com/macros/s/AKfycbyKoQkT0Hdq_ixsYs03Ha1hr-nATncexSfDAn9mroSlVwZHBaEWNmdnMtAXMd_rmuPz/exec";
+<img src="assets/images/homestay1.jpg">
+<img src="assets/images/homestay2.jpg">
+<img src="assets/images/homestay3.jpg">
+<img src="assets/images/homestay4.jpg">
 
-// số Zalo nhận booking;
-const zalo="0365725659";
+</div>
+<!-- =========================
+BLOCK 3: VIDEO TOUR HOMESTAY
+========================= -->
 
+<div class="video-box">
 
-/* =========================
-BLOCK 5: XỬ LÝ SUBMIT FORM
-========================= */
+<h2>Khám phá homestay</h2>
 
-const form=document.getElementById("bookingForm");
+<video controls>
 
-form.addEventListener("submit",function(e){
+<source src="assets/videos/tour.mp4" type="video/mp4">
 
-e.preventDefault();
+</video>
 
-/* lấy dữ liệu từ form */
+</div>
+<!-- =========================
+BLOCK 4: TIỆN ÍCH
+========================= -->
 
-let ten=document.getElementById("ten").value;
-let checkin=document.getElementById("checkin").value;
-let checkout=document.getElementById("checkout").value;
-let khach=document.getElementById("khach").value;
+<div class="features">
 
+<div class="feature">
+🏊 Hồ bơi riêng
+</div>
 
-/* =========================
-BLOCK 6: TÍNH SỐ ĐÊM
-========================= */
+<div class="feature">
+🔥 BBQ ngoài trời
+</div>
 
-let d1=new Date(checkin);
-let d2=new Date(checkout);
+<div class="feature">
+🌲 View rừng
+</div>
 
-let nights=(d2-d1)/(1000*60*60*24);
+<div class="feature">
+🚗 Gần Hà Nội
+</div>
 
-if(nights<=0){
-alert("Ngày checkout phải sau checkin");
-return;
-}
-
-
-/* =========================
-BLOCK 7: LƯU DATA VÀO GOOGLE SHEET
-========================= */
-
-fetch(API_URL,{
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify({
-ten:ten,
-checkin:checkin,
-checkout:checkout,
-khach:khach,
-dem:nights
-})
-});
-
-
-/* =========================
-BLOCK 8: TẠO NỘI DUNG TIN NHẮN
-========================= */
-
-let message=`Xin chào Homestay Hà Nội
-
-Tên: ${ten}
-Checkin: ${checkin}
-Checkout: ${checkout}
-Số khách: ${khach}
-Số đêm: ${nights}`;
-
-
-/* =========================
-BLOCK 9: HIỂN THỊ COPY + MỞ ZALO
-========================= */
-
-document.getElementById("ketqua").innerHTML=`
-
-<p><b>Thông tin đặt phòng</b></p>
-
-<textarea id="msgbox">${message}</textarea>
-
-<button onclick="copyMsg()">Copy nội dung</button>
-
-<button onclick="openZalo()">Mở Zalo gửi</button>
-
-`;
-
-});
-
-
-/* =========================
-BLOCK 10: COPY NỘI DUNG
-========================= */
-
-function copyMsg(){
-
-let text=document.getElementById("msgbox");
-
-text.select();
-
-navigator.clipboard.writeText(text.value);
-
-alert("Đã copy nội dung. Hãy mở Zalo và dán gửi.");
-
-}
-
-
-/* =========================
-BLOCK 11: MỞ ZALO;
-========================= */
-
-function openZalo(){
-
-window.location.href="https://zalo.me/"+zalo;
-
-}
-
-</script>
-
-</body>
-
-</html>
+</div>
