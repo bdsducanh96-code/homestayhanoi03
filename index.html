@@ -1,65 +1,107 @@
-<!-- =========================
-BLOCK 1: HERO BANNER
-Ảnh lớn giới thiệu homestay
-========================= -->
+<!DOCTYPE html>
+<html lang="vi">
 
-<div class="hero">
+<head>
 
-<img src="assets/images/homestay-hero.jpg" alt="Homestay Hà Nội">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Villa Sóc Sơn Retreat</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<!-- HERO BANNER -->
+
+<section class="hero">
+
+<img src="assets/images/homestay-hero.jpg">
 
 <div class="hero-text">
-<h1>Homestay nghỉ dưỡng Sóc Sơn</h1>
-<p>Không gian riêng tư – view rừng – gần Hà Nội</p>
-</div>
+
+<h1>Villa Sóc Sơn Retreat</h1>
+
+<p>Không gian nghỉ dưỡng riêng tư gần Hà Nội</p>
+
+<a class="btn-book" href="#booking">Đặt phòng ngay</a>
 
 </div>
-<!-- =========================
-BLOCK 2: GALLERY ẢNH HOMESTAY
-========================= -->
 
-<div class="gallery">
+</section>
+
+
+<!-- GALLERY -->
+
+<section class="gallery">
 
 <img src="assets/images/homestay1.jpg">
 <img src="assets/images/homestay2.jpg">
 <img src="assets/images/homestay3.jpg">
 <img src="assets/images/homestay4.jpg">
 
-</div>
-<!-- =========================
-BLOCK 3: VIDEO TOUR HOMESTAY
-========================= -->
+</section>
 
-<div class="video-box">
 
-<h2>Khám phá homestay</h2>
+<!-- TIỆN ÍCH -->
+
+<section class="features">
+
+<div class="feature">🏊 Hồ bơi riêng</div>
+
+<div class="feature">🔥 BBQ ngoài trời</div>
+
+<div class="feature">🌲 View rừng</div>
+
+<div class="feature">🚗 Cách Hà Nội 40 phút</div>
+
+</section>
+
+
+<!-- VIDEO -->
+
+<section class="video">
+
+<h2>Video trải nghiệm</h2>
 
 <video controls>
 
-<source src="assets/videos/tour.mp4" type="video/mp4">
+<source src="assets/videos/tour.mp4">
 
 </video>
 
-</div>
-<!-- =========================
-BLOCK 4: TIỆN ÍCH
-========================= -->
+</section>
 
-<div class="features">
 
-<div class="feature">
-🏊 Hồ bơi riêng
-</div>
+<!-- FORM BOOKING -->
 
-<div class="feature">
-🔥 BBQ ngoài trời
-</div>
+<section id="booking" class="booking">
 
-<div class="feature">
-🌲 View rừng
-</div>
+<h2>Đặt phòng</h2>
 
-<div class="feature">
-🚗 Gần Hà Nội
-</div>
+<form id="bookingForm">
 
-</div>
+<input type="text" placeholder="Tên khách">
+
+<input type="date">
+
+<input type="date">
+
+<select>
+<option>1 khách</option>
+<option>2 khách</option>
+<option>3 khách</option>
+<option>4 khách</option>
+</select>
+
+<button type="submit">Kiểm tra phòng</button>
+
+</form>
+
+</section>
+
+</body>
+
+</html>
