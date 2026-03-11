@@ -8,13 +8,141 @@
 
 <title>Villa Sóc Sơn Retreat</title>
 
-<link rel="stylesheet" href="css/style.css">
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#f5f5f5;
+color:#333;
+}
+
+.hero{
+position:relative;
+}
+
+.hero img{
+width:100%;
+height:420px;
+object-fit:cover;
+}
+
+.hero-text{
+position:absolute;
+bottom:40px;
+left:30px;
+color:white;
+background:rgba(0,0,0,0.5);
+padding:20px;
+border-radius:10px;
+}
+
+.btn{
+display:inline-block;
+background:#ff385c;
+color:white;
+padding:12px 22px;
+border-radius:8px;
+text-decoration:none;
+margin-top:10px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:20px;
+}
+
+.gallery img{
+width:100%;
+border-radius:10px;
+transition:0.3s;
+}
+
+.gallery img:hover{
+transform:scale(1.05);
+}
+
+.features{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+padding:20px;
+}
+
+.feature{
+background:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.video{
+padding:20px;
+}
+
+.video video{
+width:100%;
+border-radius:10px;
+}
+
+.booking{
+background:white;
+padding:25px;
+margin:20px;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.booking input,
+.booking select{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ddd;
+}
+
+.booking button{
+width:100%;
+margin-top:15px;
+padding:14px;
+border:none;
+background:#ff385c;
+color:white;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.footer{
+text-align:center;
+padding:30px;
+color:#777;
+}
+
+.zalo-btn{
+position:fixed;
+right:20px;
+bottom:20px;
+background:#0068ff;
+color:white;
+padding:14px 18px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+</style>
 
 </head>
 
 <body>
 
-<!-- HERO BANNER -->
+<!-- HERO -->
 
 <section class="hero">
 
@@ -24,28 +152,29 @@
 
 <h1>Villa Sóc Sơn Retreat</h1>
 
-<p>Không gian nghỉ dưỡng riêng tư gần Hà Nội</p>
+<p>Không gian nghỉ dưỡng riêng tư giữa rừng thông</p>
 
-<a class="btn-book" href="#booking">Đặt phòng ngay</a>
+<a href="#booking" class="btn">Đặt phòng ngay</a>
 
 </div>
 
 </section>
-
 
 <!-- GALLERY -->
 
 <section class="gallery">
 
 <img src="assets/images/homestay1.jpg">
+
 <img src="assets/images/homestay2.jpg">
+
 <img src="assets/images/homestay3.jpg">
+
 <img src="assets/images/homestay4.jpg">
 
 </section>
 
-
-<!-- TIỆN ÍCH -->
+<!-- FEATURES -->
 
 <section class="features">
 
@@ -53,12 +182,11 @@
 
 <div class="feature">🔥 BBQ ngoài trời</div>
 
-<div class="feature">🌲 View rừng</div>
+<div class="feature">🌲 View rừng thông</div>
 
 <div class="feature">🚗 Cách Hà Nội 40 phút</div>
 
 </section>
-
 
 <!-- VIDEO -->
 
@@ -68,32 +196,33 @@
 
 <video controls>
 
-<source src="assets/videos/tour.mp4">
+<source src="assets/videos/tour.mp4" type="video/mp4">
 
 </video>
 
 </section>
 
+<!-- BOOKING -->
 
-<!-- FORM BOOKING -->
-
-<section id="booking" class="booking">
+<section class="booking" id="booking">
 
 <h2>Đặt phòng</h2>
 
 <form id="bookingForm">
 
-<input type="text" placeholder="Tên khách">
+<input type="text" placeholder="Tên khách" required>
 
-<input type="date">
+<input type="date" required>
 
-<input type="date">
+<input type="date" required>
 
 <select>
+
 <option>1 khách</option>
 <option>2 khách</option>
 <option>3 khách</option>
 <option>4 khách</option>
+
 </select>
 
 <button type="submit">Kiểm tra phòng</button>
@@ -102,6 +231,29 @@
 
 </section>
 
-</body>
+<div class="footer">
 
+© 2026 Villa Sóc Sơn Retreat
+
+</div>
+
+<a class="zalo-btn" href="https://zalo.me/0365725659">
+
+Chat Zalo
+
+</a>
+
+<script>
+
+document.getElementById("bookingForm").addEventListener("submit",function(e){
+
+e.preventDefault();
+
+alert("Cảm ơn bạn! Chúng tôi sẽ liên hệ xác nhận phòng.");
+
+});
+
+</script>
+
+</body>
 </html>
