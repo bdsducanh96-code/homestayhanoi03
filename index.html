@@ -1,259 +1,263 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Homestay Hà Nội — Ở giữa lòng Hà Nội, chạm trọn trải nghiệm địa phương</title>
+  <meta name="description" content="Homestay Hà Nội: Không gian ấm cúng, vị trí thuận tiện, dịch vụ chu đáo. Phòng đôi, phòng gia đình, studio bếp riêng. Đăng ký tư vấn & nhận ưu đãi sớm." />
+  https://images.unsplash.com
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1583390011666-072cb34ba1a5?q=80&w=1920&auto=format&fit=crop" imagesrcset="https://images.unsplash.com/photo-1583390011666-072cb34ba1a5?q=80&w=1920&auto=format&fit=crop 1920w, https://images.unsplash.com/photo-1583390011666-072cb34ba1a5?q=80&w=1200&auto=format&fit=crop 1200w" imagesizesty="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&auto=format&fit=crop" />
+  <meta name="theme-color" content="#0e6bfd" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Structured Data (SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Homestay Hà Nội",
+    "url": "https://<your-username>.github.io/<your-repo>/",
+    "description": "Homestay ấm cúng tại Hà Nội, phòng đôi, gia đình, studio bếp riêng. Vị trí thuận tiện, dịch vụ chu đáo.",
+    "image": [
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=1200&auto=format&fit=crop"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Hà Nội",
+      "addressRegion": "VN",
+      "postalCode": "100000",
+      "addressCountry": "VN"
+    },
+    "telephone": "+84-xxx-xxx-xxx",
+    "amenityFeature": [
+      {"@type":"LocationFeatureSpecification","name":"Wi‑Fi tốc độ cao","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Điều hòa","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Đưa đón sân bay (thu phí)","value":true},
+      {"@type":"LocationFeatureSpecification","name":"Giặt ủi","value":true}
+    ],
+    "priceRange": "₫550.000 – ₫1.200.000/đêm"
+  }
+  </script>
 
-<title>Villa Sóc Sơn Retreat</title>
+  <style>
+    :root{
+      --primary:#0e6bfd;
+      --primary-dark:#0b56ca;
+      --accent:#f59e0b;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --success:#10b981;
+      --danger:#ef4444;
+      --ring: 0 0 0 6px rgb(14 107 253 / .15);
+      --radius:16px;
+      --shadow:0 10px 30px rgba(2,6,23,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Arial, sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1140px, 92vw);margin-inline:auto}
 
-<style>
+    /* Header */
+    .skip{position:absolute;left:-9999px;top:auto}
+    .skip:focus{left:1rem;top:1rem;background:#000;color:#fff;padding:.5rem .75rem;border-radius:8px;z-index:1000}
+    header{
+      position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(140%) blur(10px);
+      border-bottom:1px solid #e5e7eb; z-index:999;
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;padding:.8rem 0;
+    }
+    .brand{display:flex;align-items:center;gap:.6rem;font-weight:800}
+    .brand .logo{
+      width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--primary),#22c55e);
+      box-shadow:var(--shadow);
+    }
+    .nav a{padding:.5rem .75rem;color:#0f172a;font-weight:600;border-radius:10px}
+    .nav a:hover{background:#f1f5f9}
+    .cta{
+      background:var(--primary);color:#fff;border-radius:12px;padding:.7rem 1rem;font-weight:700;
+      box-shadow:0 6px 14px rgba(14,107,253,.25)
+    }
+    .cta:hover{background:var(--primary-dark)}
 
-body{
-margin:0;
-font-family:Arial;
-background:#f5f5f5;
-color:#333;
-}
+    /* Hero */
+    .hero{
+      position:relative;isolation:isolate;color:#fff;
+      background: radial-gradient(1200px 600px at 80% -10%, rgba(14,107,253,.35), transparent 40%),
+                  linear-gradient(180deg, rgba(2,6,23,.65), rgba(2,6,23,.65) ),
+                  url('https://images.unsplash.com/photo-1583390011666-072cb34ba1a5?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+    }
+    .hero .inner{padding:90px 0 64px;display:grid;grid-template-columns:1.05fr .95fr;gap:32px}
+    @media (max-width:920px){.hero .inner{grid-template-columns:1fr;padding:72px 0 48px}}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);padding:.4rem .7rem;border-radius:999px;font-size:.9rem}
+    .badge .dot{width:8px;height:8px;border-radius:999px;background:#22c55e}
+    .hero h1{font-size: clamp(28px, 4.2vw, 44px);line-height:1.2;margin:.6rem 0}
+    .hero p{color:#e2e8f0;margin-bottom:1.2rem;max-width:56ch}
+    .hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:.4rem}
+    .btn{
+      display:inline-flex;align-items:center;gap:.6rem;border:2px solid transparent;border-radius:12px;
+      padding:.9rem 1rem;font-weight:800
+    }
+    .btn.primary{background:#fff;color:#0f172a}
+    .btn.secondary{border-color:#fff;color:#fff}
+    .btn.secondary:hover{background:rgba(255,255,255,.12)}
+    .meta{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;color:#e2e8f0;font-size:.95rem}
+    .meta .chip{display:flex;align-items:center;gap:.45rem}
+    .meta svg{opacity:.9}
 
-.hero{
-position:relative;
-}
+    /* Sections */
+    section{padding:64px 0}
+    .section-title{font-size: clamp(22px, 3.2vw, 32px);line-height:1.25;margin-bottom:14px}
+    .section-desc{color:var(--muted);margin-bottom:28px}
 
-.hero img{
-width:100%;
-height:420px;
-object-fit:cover;
-}
+    /* Features */
+    .features{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    @media (max-width:1000px){.features{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.features{grid-template-columns:1fr}}
+    .feature{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;gap:14px}
+    .feature .ic{
+      width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#eff6ff;color:var(--primary)
+    }
+    .feature h3{margin:.1rem 0 .25rem;font-size:1.05rem}
+    .feature p{color:var(--muted);margin:0}
 
-.hero-text{
-position:absolute;
-bottom:40px;
-left:30px;
-color:white;
-background:rgba(0,0,0,0.5);
-padding:20px;
-border-radius:10px;
-}
+    /* Rooms */
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.cards{grid-template-columns:1fr}}
+    .card{background:var(--card);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .card .img{aspect-ratio: 16/10;background:#e2e8f0}
+    .card .body{padding:16px}
+    .badge-price{
+      display:inline-block;background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0;padding:.25rem .6rem;border-radius:999px;font-weight:800;font-size:.85rem
+    }
+    .pill{display:inline-flex;gap:.4rem;align-items:center;background:#f1f5f9;border-radius:999px;padding:.3rem .6rem;color:#334155;font-size:.85rem}
 
-.btn{
-display:inline-block;
-background:#ff385c;
-color:white;
-padding:12px 22px;
-border-radius:8px;
-text-decoration:none;
-margin-top:10px;
-}
+    /* Amenities */
+    .amenities{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    @media (max-width:1024px){.amenities{grid-template-columns:repeat(4,1fr)}}
+    @media (max-width:640px){.amenities{grid-template-columns:repeat(2,1fr)}}
+    .amen{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:12px;display:flex;gap:10px;align-items:flex-start}
+    .amen span{font-weight:600}
+    .amen small{display:block;color:var(--muted)}
 
-.gallery{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-padding:20px;
-}
+    /* Gallery */
+    .grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}
+    .grid img{border-radius:12px;height:100%;object-fit:cover}
+    .grid .col{display:grid;gap:12px}
+    @media (max-width:920px){.grid{grid-template-columns:1fr}}
 
-.gallery img{
-width:100%;
-border-radius:10px;
-transition:0.3s;
-}
+    /* Reviews */
+    .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:1000px){.reviews{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.reviews{grid-template-columns:1fr}}
+    .review{background:#fff;border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+    .stars{color:#f59e0b}
 
-.gallery img:hover{
-transform:scale(1.05);
-}
+    /* Location */
+    .l-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px}
+    @media (max-width:920px){.l-grid{grid-template-columns:1fr}}
+    .map{aspect-ratio: 16/10;border:0;width:100%;border-radius:16px;box-shadow:var(--shadow)}
 
-.features{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-padding:20px;
-}
+    /* FAQ */
+    .faq{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:920px){.faq{grid-template-columns:1fr}}
+    details{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:14px}
+    details summary{cursor:pointer;font-weight:700}
 
-.feature{
-background:white;
-padding:15px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
+    /* Contact Form */
+    .formwrap{
+      background:linear-gradient(180deg,#fff, #f8fafc);
+      border:1px solid #e5e7eb;border-radius:20px;padding:22px;box-shadow:var(--shadow)
+    }
+    form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:720px){form{grid-template-columns:1fr}}
+    label{font-weight:700}
+    input,select,textarea{
+      width:100%;padding:12px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;outline:none
+    }
+    input:focus,select:focus,textarea:focus{box-shadow:var(--ring);border-color:var(--primary)}
+    textarea{min-height:120px;resize:vertical}
+    .full{grid-column:1 / -1}
+    .consent{display:flex;gap:.6rem;align-items:flex-start}
+    .submit{
+      background:var(--primary);color:#fff;border:none;border-radius:12px;padding:14px 16px;font-weight:800;cursor:pointer
+    }
+    .submit:disabled{opacity:.6;cursor:not-allowed}
+    .note{font-size:.9rem;color:var(--muted)}
+    .alert{padding:12px;border-radius:12px;font-weight:700}
+    .alert.ok{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+    .alert.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
 
-.video{
-padding:20px;
-}
-
-.video video{
-width:100%;
-border-radius:10px;
-}
-
-.booking{
-background:white;
-padding:25px;
-margin:20px;
-border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
-}
-
-.booking input,
-.booking select{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:8px;
-border:1px solid #ddd;
-}
-
-.booking button{
-width:100%;
-margin-top:15px;
-padding:14px;
-border:none;
-background:#ff385c;
-color:white;
-font-size:16px;
-border-radius:8px;
-cursor:pointer;
-}
-
-.footer{
-text-align:center;
-padding:30px;
-color:#777;
-}
-
-.zalo-btn{
-position:fixed;
-right:20px;
-bottom:20px;
-background:#0068ff;
-color:white;
-padding:14px 18px;
-border-radius:30px;
-text-decoration:none;
-font-weight:bold;
-box-shadow:0 5px 15px rgba(0,0,0,0.2);
-}
-
-</style>
-
+    /* Footer */
+    footer{padding:28px 0;color:#475569}
+    .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+    .backtotop{
+      position:fixed;right:18px;bottom:18px;background:#111827;color:#fff;border-radius:999px;padding:10px 14px;
+      box-shadow:0 6px 16px rgba(0,0,0,.28);display:none
+    }
+    .backtotop.show{display:block}
+  </style>
 </head>
-
 <body>
+  #mainBỏ qua điều hướng</a>
 
-<!-- HERO -->
+  <header>
+    <div class="container nav" aria-label="Thanh điều hướng">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <span>Homestay Hà Nội</span>
+      </div>
+      <nav>
+        #aboutGiới thiệu</a>
+        #roomsLoại phòng</a>
+        <a href="#amenities</a>
+        #galleryHình ảnh</a>
+        #reviewsĐánh giá</a>
+        #faqFAQ</a>
+        #contactĐăng ký tư vấn</a>
+      </nav>
+    </div>
+  </header>
 
-<section class="hero">
+  <section class="hero">
+    <div class="container inner">
+      <div>
+        <div class="badge" aria-label="Ưu đãi đang mở"><span class="dot"></span> Ưu đãi đặt sớm đến 10%</div>
+        <h1>Ở giữa lòng Hà Nội, <br/>chạm trọn trải nghiệm địa phương</h1>
+        <p>Không gian ấm cúng, sạch sẽ, tiện nghi đủ đầy. Phù hợp cặp đôi, nhóm bạn & gia đình. Dịch vụ chu đáo – giá tốt – hỗ trợ 24/7.</p>
+        <div class="actions">
+          #contact
+            Đăng ký tư vấn ngay
+          </a>
+          <a href="#rooms" class="btn secondaryv>
+        <div class="meta" aria-label="Thông tin nhanh">
+          <div class="chip" title="Nhận phòng linh hoạt">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 8v5l3 3m6-4a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            Check‑in linh hoạt
+          </div>
+          <div class="chip" title="Hỗ trợ 24/7">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 13v5a2 2 0 01-2 2H6l-4 4V5a2 2 0 012-2h12a2 2 0 012 2v3"/></svg>
+            Hỗ trợ 24/7
+          </div>
+          <div class="chip" title="Vị trí thuận tiện">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 11a4 4 0 100-8 4 4 0 000 8zm0 2C9 13 3 14.5 3 17v2h18v-2c0-2.5-6-4-9-4z"/></svg>
+            Vị trí thuận tiện
+          </div>
+        </div>
+      </div>
 
-<img src="assets/images/homestay-hero.jpg">
-
-<div class="hero-text">
-
-<h1>Villa Sóc Sơn Retreat</h1>
-
-<p>Không gian nghỉ dưỡng riêng tư giữa rừng thông</p>
-
-<a href="#booking" class="btn">Đặt phòng ngay</a>
-
-</div>
-
-</section>
-
-<!-- GALLERY -->
-
-<section class="gallery">
-
-<img src="assets/images/homestay1.jpg">
-
-<img src="assets/images/homestay2.jpg">
-
-<img src="assets/images/homestay3.jpg">
-
-<img src="assets/images/homestay4.jpg">
-
-</section>
-
-<!-- FEATURES -->
-
-<section class="features">
-
-<div class="feature">🏊 Hồ bơi riêng</div>
-
-<div class="feature">🔥 BBQ ngoài trời</div>
-
-<div class="feature">🌲 View rừng thông</div>
-
-<div class="feature">🚗 Cách Hà Nội 40 phút</div>
-
-</section>
-
-<!-- VIDEO -->
-
-<section class="video">
-
-<h2>Video trải nghiệm</h2>
-
-<video controls>
-
-<source src="assets/videos/tour.mp4" type="video/mp4">
-
-</video>
-
-</section>
-
-<!-- BOOKING -->
-
-<section class="booking" id="booking">
-
-<h2>Đặt phòng</h2>
-
-<form id="bookingForm">
-
-<input type="text" placeholder="Tên khách" required>
-
-<input type="date" required>
-
-<input type="date" required>
-
-<select>
-
-<option>1 khách</option>
-<option>2 khách</option>
-<option>3 khách</option>
-<option>4 khách</option>
-
-</select>
-
-<button type="submit">Kiểm tra phòng</button>
-
-</form>
-
-</section>
-
-<div class="footer">
-
-© 2026 Villa Sóc Sơn Retreat
-
-</div>
-
-<a class="zalo-btn" href="https://zalo.me/0365725659">
-
-Chat Zalo
-
-</a>
-
-<script>
-
-document.getElementById("bookingForm").addEventListener("submit",function(e){
-
-e.preventDefault();
-
-alert("Cảm ơn bạn! Chúng tôi sẽ liên hệ xác nhận phòng.");
-
-});
-
-</script>
-
-</body>
-</html>
+      <div>
+        <div class="features">
+          <article class="feature">
+            <div class="ic" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M2 8l10-5 10 5-10 5L2 8zm0 8l10 5 10-5"/></svg>
