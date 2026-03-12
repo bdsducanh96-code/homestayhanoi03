@@ -1,44 +1,38 @@
 <!doctype html>
 <html lang="vi">
 <head>
-
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Homestay Hà Nội</title>
 
 <style>
 
 :root{
 --accent:#ff6b35;
---dark:#0f172a;
 --muted:#6b7280;
+--card-bg:#fff;
+--glass: rgba(255,255,255,0.85);
 --maxw:1200px;
 }
 
 *{box-sizing:border-box}
 
 body{
+font-family:Inter,system-ui,Arial;
 margin:0;
-font-family:Inter,Arial;
 background:linear-gradient(#f8fafc,#eef2f7);
-color:#111;
+color:#111
 }
 
-.container{
-width:92%;
-max-width:var(--maxw);
-margin:auto;
-}
+.container{width:92%;max-width:var(--maxw);margin:0 auto}
 
 /* HERO */
 
 .hero{
-height:85vh;
+min-height:62vh;
 display:flex;
 align-items:flex-end;
 justify-content:center;
-text-align:center;
 color:white;
 position:relative;
 background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
@@ -48,220 +42,194 @@ background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=8
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.65));
+background:linear-gradient(180deg, rgba(2,6,23,0.35), rgba(2,6,23,0.65))
 }
 
 .hero-inner{
 position:relative;
 z-index:2;
-padding-bottom:80px;
+text-align:center;
+padding:120px 40px 40px 40px
 }
 
 .hero h1{
-font-size:clamp(28px,5vw,52px);
-font-weight:800;
+font-size:clamp(26px,4vw,44px);
+margin:0 0 8px;
 background:linear-gradient(45deg,#ff6b35,#ffb347);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-text-shadow:0 4px 25px rgba(255,120,40,0.4);
-margin-bottom:10px;
+text-shadow:0 4px 20px rgba(255,120,40,0.35)
 }
 
-.hero p{
-font-size:20px;
-}
+.hero p{margin:0 0 16px;color:#f0eede}
 
 .btn{
 background:var(--accent);
-padding:14px 28px;
+color:#fff;
+padding:12px 22px;
 border-radius:8px;
 text-decoration:none;
-color:white;
-font-weight:600;
+font-weight:600
 }
 
 /* STATS */
 
 .stats{
-padding:60px 0;
-background:white;
-}
-
-.stats h2{
-text-align:center;
-margin-bottom:35px;
+margin-top:-28px;
+padding:28px 0;
+background:#ffffff
 }
 
 .stats-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px
 }
 
 .stat-card{
-background:#fff7f3;
-padding:20px;
-border-radius:10px;
-text-align:center;
-box-shadow:0 6px 18px rgba(0,0,0,0.05);
+background:var(--card-bg);
+padding:18px;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(2,6,23,0.06);
+text-align:center
 }
 
-.stat-num{
-font-size:28px;
-font-weight:800;
-}
-
-.stat-label{
-color:var(--muted);
-}
+.stat-num{font-size:22px;font-weight:800;color:var(--accent)}
+.stat-label{color:var(--muted);margin-top:6px}
 
 /* FEATURES */
 
 .features{
-padding:60px 0;
-background:#f9fafb;
+padding:36px 0;
+background:#f9fafb
 }
 
 .feature-row{
 display:flex;
 gap:20px;
 align-items:center;
-margin-bottom:30px;
-flex-wrap:wrap;
+margin-bottom:28px;
+flex-wrap:wrap
 }
 
-.feature-row:nth-child(even){
-flex-direction:row-reverse;
-}
+.feature-row:nth-child(even){flex-direction:row-reverse}
+
+.feature-img{flex:1;min-width:260px}
 
 .feature-img img{
 width:100%;
 border-radius:12px;
-height:220px;
+display:block;
 object-fit:cover;
+height:220px
 }
 
 .feature-content{
 flex:1;
-background:white;
-padding:20px;
+min-width:260px;
+background:var(--card-bg);
+padding:18px;
 border-radius:12px;
-box-shadow:0 5px 15px rgba(0,0,0,0.05);
+box-shadow:0 8px 20px rgba(2,6,23,0.06)
 }
 
-.feature-title{
-font-weight:700;
-font-size:18px;
-margin-bottom:8px;
-}
+.feature-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.feature-desc{color:var(--muted)}
 
 /* GALLERY */
 
 .gallery{
-padding:60px 0;
-background:white;
+padding:36px 0;
+background:#ffffff;
+border-top:1px solid #eee;
+border-bottom:1px solid #eee
 }
 
 .gallery-grid{
 display:grid;
 grid-template-columns:2fr 1fr 1fr;
-gap:12px;
+gap:12px
 }
 
 .gallery-grid img{
 width:100%;
-border-radius:10px;
-cursor:pointer;
+height:100%;
+object-fit:cover;
+border-radius:10px
 }
 
 @media(max-width:900px){
 .gallery-grid{grid-template-columns:1fr}
 }
 
-/* REVIEWS */
+/* VIDEO */
 
-.reviews{
-padding:60px 0;
-background:#f3f4f6;
+.video{
+padding:36px 0;
+text-align:center;
+background:#f9fafb
 }
 
-.rev-track{
-display:flex;
-gap:16px;
-overflow-x:auto;
+video{
+max-width:100%;
+border-radius:12px;
+box-shadow:0 8px 20px rgba(2,6,23,0.06)
 }
 
-.rev{
-min-width:280px;
-background:white;
-padding:18px;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.05);
-}
-
-.star{color:#ffb020}
-
-/* FORM */
+/* BOOKING FORM */
 
 .form-section{
 background:linear-gradient(180deg,#0f172a,#071029);
-color:white;
-padding:60px 0;
+color:#fff;
+padding:40px 0
 }
 
 .form-card{
-max-width:600px;
-margin:auto;
-background:white;
-padding:25px;
-border-radius:12px;
-color:black;
+background:var(--glass);
+backdrop-filter:blur(6px);
+max-width:720px;
+margin:0 auto;
+padding:20px;
+border-radius:12px
+}
+
+.form-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px
+}
+
+@media(max-width:700px){
+.form-row{grid-template-columns:1fr}
 }
 
 label{
-font-weight:600;
 font-size:14px;
+font-weight:600;
+margin-top:8px;
+display:block
 }
 
 input{
 width:100%;
 padding:12px;
-margin-top:6px;
-margin-bottom:14px;
 border-radius:8px;
-border:1px solid #ddd;
+border:1px solid rgba(0,0,0,0.08);
+font-size:15px;
+margin-top:4px
 }
 
 .submit-btn{
 background:var(--accent);
 border:none;
-padding:12px;
-color:white;
-font-weight:700;
-width:100%;
+padding:12px 14px;
 border-radius:8px;
+color:#fff;
+font-weight:700;
+width:100%
 }
 
-/* floating */
-
-.floating{
-position:fixed;
-right:20px;
-bottom:20px;
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-.floating a{
-background:#0068ff;
-color:white;
-padding:12px 16px;
-border-radius:30px;
-text-decoration:none;
-}
-
-/* modal */
+/* MODAL */
 
 .modal{
 position:fixed;
@@ -269,47 +237,106 @@ inset:0;
 display:none;
 align-items:center;
 justify-content:center;
-background:rgba(0,0,0,0.6);
+background:rgba(0,0,0,0.5);
+z-index:60
 }
 
 .modal-card{
-background:white;
-padding:20px;
-border-radius:10px;
-max-width:500px;
-width:90%;
+width:92%;
+max-width:520px;
+background:#fff;
+padding:18px;
+border-radius:12px
 }
 
 .msgbox{
 width:100%;
-height:140px;
+height:160px;
+border-radius:8px;
+border:1px solid #ddd;
+padding:10px
 }
 
-</style>
+/* REVIEWS */
 
+.reviews{
+padding:36px 0;
+background:#ffffff
+}
+
+.rev-track{
+display:flex;
+gap:12px;
+overflow-x:auto;
+padding:12px
+}
+
+.rev{
+min-width:260px;
+background:#fff;
+padding:14px;
+border-radius:10px;
+box-shadow:0 6px 18px rgba(2,6,23,0.06)
+}
+
+.rev .star{color:#ffb020}
+.rev p{color:#555;font-size:14px}
+
+/* FOOTER */
+
+footer{
+padding:30px 0;
+text-align:center;
+color:var(--muted)
+}
+
+/* FLOATING */
+
+.floating{
+position:fixed;
+right:16px;
+bottom:16px;
+display:flex;
+flex-direction:column;
+gap:10px;
+z-index:80
+}
+
+.floating a{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:12px 14px;
+background:#0068ff;
+color:#fff;
+border-radius:999px;
+text-decoration:none;
+box-shadow:0 8px 20px rgba(0,0,0,0.12)
+}
+
+.center{text-align:center}
+
+</style>
 </head>
 
 <body>
 
+<!-- HERO -->
+
 <section class="hero">
-
 <div class="hero-inner container">
-
 <h1>HOMESTAY HÀ NỘI</h1>
-
-<p>Nghỉ dưỡng thiên nhiên bên hồ Đồng Đò Sóc Sơn</p>
-
+<p>Tận hưởng kỳ nghỉ dưỡng tuyệt vời bên gia đình</p>
 <a class="btn" href="#form">Nhận tư vấn</a>
-
 </div>
-
 </section>
 
-<section class="stats">
+<!-- STATS -->
 
+<section class="stats">
 <div class="container">
 
-<h2>Homestay Hà Nội tự hào là thương hiệu vì khách hàng</h2>
+<h2 class="center">Homestay Hà Nội tự hào là thương hiệu vì khách hàng</h2>
 
 <div class="stats-grid">
 
@@ -325,21 +352,110 @@ height:140px;
 </div>
 </section>
 
-<section class="reviews container">
+<!-- FEATURES -->
 
-<h2 style="text-align:center">Trải nghiệm thực tế của khách</h2>
+<section class="features container">
 
-<div class="rev-track" id="revTrack"></div>
+<h2 class="center">Tiện ích nổi bật</h2>
+
+<div class="feature-row">
+<div class="feature-img">
+<img src="https://images.unsplash.com/photo-1576013551627-0b2f2b5c0c73?q=80&w=1200&auto=format&fit=crop">
+</div>
+<div class="feature-content">
+<div class="feature-title">Bể bơi view hồ</div>
+<div class="feature-desc">Bể bơi rộng với view hồ Đồng Đò, phù hợp nghỉ dưỡng và check-in.</div>
+</div>
+</div>
+
+<div class="feature-row">
+<div class="feature-img">
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop">
+</div>
+<div class="feature-content">
+<div class="feature-title">Chèo kayak</div>
+<div class="feature-desc">Trải nghiệm chèo thuyền thư giãn trên hồ, rất được khách yêu thích.</div>
+</div>
+</div>
+
+<div class="feature-row">
+<div class="feature-img">
+<img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=1200&auto=format&fit=crop">
+</div>
+<div class="feature-content">
+<div class="feature-title">BBQ ngoài trời</div>
+<div class="feature-desc">Không gian sân vườn rộng rãi để tổ chức tiệc nướng cùng gia đình.</div>
+</div>
+</div>
+
+<div class="feature-row">
+<div class="feature-img">
+<img src="https://images.unsplash.com/photo-1600962815726-457c46a12681?q=80&w=1200&auto=format&fit=crop">
+</div>
+<div class="feature-content">
+<div class="feature-title">Sân Pickleball</div>
+<div class="feature-desc">Sân thể thao ngoài trời cho nhóm bạn vui chơi.</div>
+</div>
+</div>
+
+<div class="feature-row">
+<div class="feature-img">
+<img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1200&auto=format&fit=crop">
+</div>
+<div class="feature-content">
+<div class="feature-title">Phòng Karaoke</div>
+<div class="feature-desc">Hệ thống karaoke riêng cho buổi tối giải trí.</div>
+</div>
+</div>
 
 </section>
 
-<section id="form" class="form-section">
+<!-- GALLERY -->
 
+<section class="gallery">
 <div class="container">
 
+<h2 class="center">Hình ảnh villa</h2>
+
+<div class="gallery-grid" style="margin-top:16px">
+
+<img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=1200">
+
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800">
+
+<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800">
+
+<img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=1200">
+
+</div>
+</div>
+</section>
+
+<!-- VIDEO -->
+
+<section class="video container">
+<h2 class="center">Video trải nghiệm</h2>
+<div style="display:flex;justify-content:center;margin-top:14px">
+<video controls playsinline preload="metadata" style="max-width:900px">
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+</video>
+</div>
+</section>
+
+<!-- REVIEWS -->
+
+<section class="reviews container">
+<h2 class="center">Trải nghiệm thực tế của khách</h2>
+<div class="rev-track" id="revTrack"></div>
+</section>
+
+<!-- FORM -->
+
+<section id="form" class="form-section">
+<div class="container">
 <div class="form-card">
 
-<h2 style="text-align:center">Tôi muốn được tư vấn</h2>
+<h2 class="center" style="margin-bottom:12px">Tôi muốn được tư vấn</h2>
 
 <form id="bookingForm">
 
@@ -349,132 +465,155 @@ height:140px;
 <label>Số điện thoại</label>
 <input id="phone" required>
 
-<label>Ngày Check-in</label>
+<div class="form-row">
+<div>
+<label>Ngày check-in</label>
 <input id="checkin" type="date" required>
+</div>
 
-<label>Ngày Check-out</label>
+<div>
+<label>Ngày check-out</label>
 <input id="checkout" type="date" required>
+</div>
+</div>
 
 <label>Số khách</label>
-<input id="guests" type="number" value="2">
+<input id="guests" type="number" min="1" value="2">
 
-<button class="submit-btn">Nhận tư vấn ngay</button>
+<div style="margin-top:14px">
+<button class="submit-btn" type="submit">Nhận tư vấn ngay</button>
+</div>
 
 </form>
-
 </div>
 </div>
-
 </section>
 
-<div class="modal" id="modal">
+<!-- MODAL -->
 
+<div class="modal" id="modal">
 <div class="modal-card">
 
 <h3>Xác nhận thông tin</h3>
 
-<textarea id="msgBox" class="msgbox"></textarea>
+<div id="confirmText" style="margin-bottom:10px;color:#444"></div>
 
-<button id="copyBtn">Copy thông tin</button>
+<textarea id="msgBox" class="msgbox" readonly></textarea>
 
-<button id="zaloBtn">Mở Zalo</button>
+<div style="display:flex;gap:10px;margin-top:10px">
+
+<button id="copyBtn" style="flex:1;padding:10px;border-radius:8px;background:#111;color:#fff;border:none">Copy thông tin</button>
+
+<button id="zaloBtn" style="flex:1;padding:10px;border-radius:8px;background:#0068ff;color:#fff;border:none">Mở Zalo & dán</button>
 
 </div>
 
+<div style="text-align:right;margin-top:8px">
+<button id="closeModal" style="background:none;border:none;color:#666">Đóng</button>
 </div>
+
+</div>
+</div>
+
+<!-- FLOATING -->
 
 <div class="floating">
-
 <a href="tel:0365725659">📞 Gọi ngay</a>
-
 <a href="https://zalo.me/0365725659">💬 Zalo</a>
-
 </div>
+
+<footer class="container">
+<p>© 2026 Villa Hồ Đồng Đò — Liên hệ: 0365725659</p>
+</footer>
 
 <script>
 
-const API_URL="https://script.google.com/macros/s/AKfycbyKoQkT0Hdq_ixsYs03Ha1hr-nATncexSfDAn9mroSlVwZHBaEWNmdnMtAXMd_rmuPz/exec"
+/* ===== API ===== */
 
-const ZALO="0365725659"
+const API_URL="https://script.google.com/macros/s/AKfycbyKoQkT0Hdq_ixsYs03Ha1hr-nATncexSfDAn9mroSlVwZHBaEWNmdnMtAXMd_rmuPz/exec";
+const ZALO="0365725659";
+
+/* REVIEWS */
 
 const reviews=[
-
-{name:"Linh",star:5,text:"Không gian ở đây cực kỳ chill. Sáng mở cửa ra là thấy hồ mờ sương rất đẹp, cảm giác thư giãn đúng nghĩa nghỉ dưỡng. Nhóm mình đã có buổi BBQ rất vui và chắc chắn sẽ quay lại vào mùa hè."},
-
-{name:"Huy",star:5,text:"Villa khá gần Hà Nội nên đi lại rất tiện. Bể bơi sạch, view hồ cực đẹp, đặc biệt là lúc hoàng hôn. Nhân viên hỗ trợ nhiệt tình."},
-
-{name:"Trang",star:5,text:"Mình thích nhất là khu sân vườn rộng và khu BBQ. Nhóm bạn tụi mình checkin chụp ảnh cả buổi không chán."}
-
-]
+{name:"Linh",star:5,text:"Villa rất đẹp, bể bơi sạch và view hồ buổi sáng cực kỳ chill. Nhóm mình 6 người đã có buổi BBQ rất vui và chắc chắn sẽ quay lại lần nữa."},
+{name:"Huy",star:5,text:"Không gian cực kỳ yên tĩnh, phù hợp nghỉ dưỡng cuối tuần. Bọn mình chèo kayak và chụp ảnh rất nhiều."},
+{name:"Trang",star:5,text:"Sân vườn rộng, có nhiều góc sống ảo. Nhân viên hỗ trợ nhiệt tình và rất thân thiện."},
+{name:"Minh",star:5,text:"Gia đình mình có trẻ nhỏ nên rất thích khu hồ bơi và không gian rộng rãi ở đây."},
+{name:"Nga",star:5,text:"View hồ đẹp, phòng sạch sẽ và tiện nghi. Buổi tối BBQ và karaoke rất vui."},
+{name:"An",star:5,text:"Một trải nghiệm nghỉ dưỡng rất đáng nhớ. Không khí trong lành và rất thư giãn."}
+];
 
 function renderReviews(){
-
-const track=document.getElementById("revTrack")
-
+const track=document.getElementById("revTrack");
 reviews.forEach(r=>{
-
-const div=document.createElement("div")
-
-div.className="rev"
-
-div.innerHTML=`<strong>${r.name}</strong>
-<div class="star">${"★".repeat(r.star)}</div>
-<p>${r.text}</p>`
-
-track.appendChild(div)
-
-})
-
+const div=document.createElement("div");
+div.className="rev";
+div.innerHTML=`<strong>${r.name}</strong><div class="star">${"★".repeat(r.star)}</div><p>${r.text}</p>`;
+track.appendChild(div);
+});
 }
 
-renderReviews()
+renderReviews();
 
-const form=document.getElementById("bookingForm")
+/* FORM */
 
-const modal=document.getElementById("modal")
+const form=document.getElementById("bookingForm");
+const modal=document.getElementById("modal");
+const msgBox=document.getElementById("msgBox");
+const confirmText=document.getElementById("confirmText");
 
-const msgBox=document.getElementById("msgBox")
+form.addEventListener("submit",(e)=>{
 
-form.addEventListener("submit",e=>{
+e.preventDefault();
 
-e.preventDefault()
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const checkin=document.getElementById("checkin").value;
+const checkout=document.getElementById("checkout").value;
+const guests=document.getElementById("guests").value;
 
-const name=document.getElementById("name").value
+const message=`Xin chào Villa Hồ Đồng Đò
 
-const phone=document.getElementById("phone").value
+Tên: ${name}
+SĐT: ${phone}
+Checkin: ${checkin}
+Checkout: ${checkout}
+Số khách: ${guests}
 
-const checkin=document.getElementById("checkin").value
+Mã booking tạm: HN${Date.now().toString().slice(-6)}`;
 
-const checkout=document.getElementById("checkout").value
+msgBox.value=message;
 
-const guests=document.getElementById("guests").value
+modal.style.display="flex";
 
-const message=`Xin chào Homestay Hà Nội
-Tên:${name}
-SĐT:${phone}
-Checkin:${checkin}
-Checkout:${checkout}
-Khách:${guests}`
+fetch(API_URL,{
+method:"POST",
+mode:"no-cors",
+body:JSON.stringify({name,phone,checkin,checkout,guests})
+});
 
-msgBox.value=message
-
-modal.style.display="flex"
-
-fetch(API_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({name,phone,checkin,checkout,guests})})
-
-})
+});
 
 document.getElementById("copyBtn").onclick=()=>{
-
-navigator.clipboard.writeText(msgBox.value)
-
+navigator.clipboard.writeText(msgBox.value);
+alert("Đã copy nội dung");
 }
 
 document.getElementById("zaloBtn").onclick=()=>{
-
-window.location.href="https://zalo.me/"+ZALO
-
+window.location.href="https://zalo.me/"+ZALO;
 }
+
+document.getElementById("closeModal").onclick=()=>{
+modal.style.display="none";
+}
+
+document.querySelectorAll(".gallery-grid img").forEach(img=>{
+img.onclick=()=>{
+const w=window.open("");
+w.document.write(`<img src="${img.src}" style="max-width:100%">`);
+}
+})
 
 </script>
 
