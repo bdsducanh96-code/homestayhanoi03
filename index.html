@@ -590,8 +590,7 @@ if (closeModal) {
       modal.style.display = 'none';
     });
 }
-
-// 1. Copy & Mở Zalo (Giữ nguyên nhưng thêm kiểm tra msgBox)
+/* ====== 1. COPY & MỞ ZALO ====== */
 const copyBtn = document.getElementById('copyAndZaloBtn');
 if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
@@ -608,31 +607,42 @@ if (copyBtn) {
     });
 }
 
-// 2. Logic cho nút Zalo bay (Floating Button) - SỬA LẠI ID CHO KHỚP
+/* ====== 2. LOGIC NÚT ZALO BAY & TỰ ĐỘNG MỞ LỊCH ====== */
 document.addEventListener("DOMContentLoaded", function() {
     const zaloBtn = document.getElementById('floatingZaloBtn');
     const nameInput = document.getElementById('name');
-    // SỬA TẠI ĐÂY: Đổi 'form' thành 'bookingForm' cho khớp với ID thực tế của bạn
-    const targetForm = document.getElementById('bookingForm'); 
+    const targetForm = document.getElementById('bookingForm'); // Luôn dùng bookingForm
 
+    // Xử lý nút Zalo bay
     if (zaloBtn) {
         zaloBtn.addEventListener('click', function(e) {
             e.preventDefault();
             if (targetForm) {
                 targetForm.scrollIntoView({ behavior: 'smooth' });
-                
-                // Chỉ hiện Alert và Focus nếu người dùng nhấn trực tiếp vào nút Zalo bay
+                // Chỉ hiện thông báo khi bấm thực sự vào nút Zalo bay
                 setTimeout(function() {
                     alert("Vui lòng điền thông tin vào form dưới đây để chúng tôi tư vấn chi tiết cho bạn nhé!");
                     if (nameInput) nameInput.focus();
-                }, 500);
+                }, 600);
             }
         });
     }
-});
-  // Tự động mở bảng chọn ngày khi click vào ô input
-const dateInputs = [document.getElementById('checkin'), document.getElementById('checkout')];
 
+    // Tự động mở bảng chọn ngày (Gộp vào đây cho sạch code)
+    const dateInputs = [document.getElementById('checkin'), document.getElementById('checkout')];
+    dateInputs.forEach(input => {
+        if (input) {
+            input.addEventListener('click', function() {
+                try {
+                    this.showPicker();
+                } catch (err) {
+                    console.log("Trình duyệt không hỗ trợ showPicker");
+                }
+            });
+        }
+    });
+});
+  
 dateInputs.forEach(input => {
     input.addEventListener('click', function() {
         try {
