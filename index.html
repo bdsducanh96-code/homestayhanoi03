@@ -473,7 +473,7 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbwGPGMKMG-h6SVBBEJ8RkbEBfmu5OCmH9IWqyxbFjq3PfWrJSes1Tg7OfIJCtarIiIA/exec";
 const ZALO = "0365725659";
-
+/*
 /* ====== LOGIC AUTO FORMAT NGÀY (DD/MM/YYYY) ====== */
 function formatDatePicker(e) {
   let v = e.target.value.replace(/\D/g,'').slice(0, 8);
@@ -487,7 +487,7 @@ function formatDatePicker(e) {
 }
 document.getElementById('checkin').addEventListener('input', formatDatePicker);
 document.getElementById('checkout').addEventListener('input', formatDatePicker);
-
+*/
 /* ====== REVIEWS ====== */
 const reviews = [
   {name: "Chị Thùy Linh", star: 5, text: "Gia đình mình vừa có chuyến đi cuối tuần cực kỳ đáng nhớ. Không gian rộng rãi, thoáng mát, bao quanh là rừng thông xanh mướt."},
@@ -522,46 +522,61 @@ const closeModal = document.getElementById('closeModal');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  
   const name = document.getElementById('name').value;
   const phone = document.getElementById('phone').value;
-  const checkinStr = document.getElementById('checkin').value;
-  const checkoutStr = document.getElementById('checkout').value;
+  const checkinVal = document.getElementById('checkin').value; // Trả về dạng YYYY-MM-DD
+  const checkoutVal = document.getElementById('checkout').value; // Trả về dạng YYYY-MM-DD
   const guests = document.getElementById('guests').value;
 
-  // Validate định dạng ngày
-  if(checkinStr.length < 10 || checkoutStr.length < 10) {
-      alert("Vui lòng nhập ngày đủ định dạng ngày/tháng/năm (VD: 13/04/2026)");
+  // 1. Kiểm tra đã chọn ngày chưa
+  if(!checkinVal || !checkoutVal) {
+      alert("Vui lòng chọn ngày Check-in và Check-out trên lịch!");
       return;
   }
 
-  // Logic tính số ngày đêm
-  const parseDate = (str) => {
-      const p = str.split('/');
-      return new Date(p[2], p[1]-1, p[0]);
-  };
-  const d1 = parseDate(checkinStr);
-  const d2 = parseDate(checkoutStr);
+  // 2. Logic tính số ngày đêm cho type="date"
+  const d1 = new Date(checkinVal);
+  const d2 = new Date(checkoutVal);
   const nights = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
-  const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày";
+  
+  if (nights < 0) {
+      alert("Ngày Check-out phải sau ngày Check-in!");
+      return;
+  }
+  
+  const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày (trong ngày)";
 
+  // 3. Đổi định dạng hiển thị cho đẹp để gửi Zalo (Từ 2026-04-13 thành 13/04/2026)
+  const formatVN = (dateStr) => dateStr.split('-').reverse().join('/');
+  const checkinDisplay = formatVN(checkinVal);
+  const checkoutDisplay = formatVN(checkoutVal);
+
+  // 4. Tạo mã Booking
   let currentCounter = parseInt(localStorage.getItem('ss_booking_counter') || "1000");
   currentCounter += 1;
   localStorage.setItem('ss_booking_counter', currentCounter);
   const bookingCode = `SS${currentCounter}`;
 
+  // 5. Gửi lên Google Sheet
   try {
     fetch(API_URL, { method:'POST', mode:'no-cors', body: JSON.stringify({
-      name, phone, checkin: checkinStr, checkout: checkoutStr, guests, duration: stayDurationText, code: bookingCode, time: new Date().toISOString()
+      name, phone, checkin: checkinDisplay, checkout: checkoutDisplay, guests, duration: stayDurationText, code: bookingCode, time: new Date().toISOString()
     })});
   } catch(err) { console.warn('Lỗi gửi data'); }
 
-  const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinStr}\n- Check-out: ${checkoutStr}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
+  // 6. Hiển thị Popup
+  const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
   
-  confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
+  if (confirmText) confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
   msgBox.value = message;
   modal.style.display = 'flex';
 });
 
+// Giữ nguyên các phần bên dưới từ đây:
+// Đóng modal
+// ... (code cũ của bạn) ...
+  
 // Đóng modal
 closeModal.addEventListener('click', () => {
   modal.style.display = 'none';
