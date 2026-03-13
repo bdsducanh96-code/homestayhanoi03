@@ -555,7 +555,7 @@ if (form) {
         })
       }).catch(err => console.warn('Lỗi gửi API'));
 
-      const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
+      const message = `Chào Homestay Hà Nội, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
       
       if (confirmText) confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
       if (msgBox) msgBox.value = message;
