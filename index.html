@@ -559,42 +559,62 @@ const closeModal = document.getElementById('closeModal');
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  // 1. Lấy dữ liệu từ form
   const name = document.getElementById('name').value;
   const phone = document.getElementById('phone').value;
-  const checkinStr = document.getElementById('checkin').value;
-  const checkoutStr = document.getElementById('checkout').value;
+  const checkinVal = document.getElementById('checkin').value; // Giá trị là YYYY-MM-DD
+  const checkoutVal = document.getElementById('checkout').value;
   const guests = document.getElementById('guests').value;
+  const note = document.getElementById('note') ? document.getElementById('note').value : "";
 
-  // Validate định dạng ngày
-  if(checkinStr.length < 10 || checkoutStr.length < 10) {
-      alert("Vui lòng nhập ngày đủ định dạng ngày/tháng/năm (VD: 13/04/2026)");
-      return;
+  // 2. Kiểm tra nếu chưa chọn ngày
+  if (!checkinVal || !checkoutVal) {
+    alert("Vui lòng chọn đầy đủ ngày Check-in và Check-out");
+    return;
   }
 
-  // Logic tính số ngày đêm
-  const parseDate = (str) => {
-      const p = str.split('/');
-      return new Date(p[2], p[1]-1, p[0]);
-  };
-  const d1 = parseDate(checkinStr);
-  const d2 = parseDate(checkoutStr);
+  // 3. Logic tính số ngày đêm (Tương thích với type="date")
+  const d1 = new Date(checkinVal);
+  const d2 = new Date(checkoutVal);
   const nights = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
-  const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày";
 
+  if (nights < 0) {
+    alert("Ngày Check-out không được trước ngày Check-in!");
+    return;
+  }
+  const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày (trong ngày)";
+
+  // 4. Định dạng lại ngày sang DD/MM/YYYY để gửi Zalo cho đẹp
+  const formatVN = (dateStr) => dateStr.split('-').reverse().join('/');
+  const checkinDisplay = formatVN(checkinVal);
+  const checkoutDisplay = formatVN(checkoutVal);
+
+  // 5. Quản lý mã đặt phòng (Booking Code)
   let currentCounter = parseInt(localStorage.getItem('ss_booking_counter') || "1000");
   currentCounter += 1;
   localStorage.setItem('ss_booking_counter', currentCounter);
   const bookingCode = `SS${currentCounter}`;
 
+  // 6. Gửi dữ liệu đi (Google Sheets/API)
   try {
-    fetch(API_URL, { method:'POST', mode:'no-cors', body: JSON.stringify({
-      name, phone, checkin: checkinStr, checkout: checkoutStr, guests, duration: stayDurationText, code: bookingCode, time: new Date().toISOString()
-    })});
+    fetch(API_URL, { 
+      method:'POST', 
+      mode:'no-cors', 
+      body: JSON.stringify({
+        name, phone, checkin: checkinDisplay, checkout: checkoutDisplay, 
+        guests, duration: stayDurationText, code: bookingCode, time: new Date().toISOString()
+      })
+    });
   } catch(err) { console.warn('Lỗi gửi data'); }
 
-  const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinStr}\n- Check-out: ${checkoutStr}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
+  // 7. Tạo nội dung tin nhắn và HIỂN THỊ POPUP
+  const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}${note ? '\n- Ghi chú: ' + note : ''}`;
   
-  confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
+  // Gán nội dung vào Popup và hiển thị
+  if (typeof confirmText !== 'undefined') {
+      confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
+  }
   msgBox.value = message;
   modal.style.display = 'flex';
 });
