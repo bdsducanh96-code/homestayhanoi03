@@ -512,17 +512,16 @@ function renderReviews() {
   });
 }
 renderReviews();
-
-/* ====== FORM SUBMIT LOGIC (ĐÃ KHỚP ID VỚI HTML CỦA BẠN) ====== */
+/* ====== FORM SUBMIT LOGIC (ĐÃ SỬA KHỚP ID 'modal') ====== */
 const form = document.getElementById('bookingForm');
-// Sửa ID từ 'modal' thành 'successModal' cho đúng với HTML
-const modal = document.getElementById('successModal'); 
+// Sửa 'successModal' thành 'modal' cho khớp với HTML của bạn
+const modal = document.getElementById('modal'); 
 const msgBox = document.getElementById('msgBox');
 const confirmText = document.getElementById('confirmText');
 const closeModal = document.getElementById('closeModal');
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault(); // Ngăn nhảy trang lên đầu
+  e.preventDefault(); 
   
   try {
     const name = document.getElementById('name').value;
@@ -531,13 +530,11 @@ form.addEventListener('submit', async (e) => {
     const checkoutVal = document.getElementById('checkout').value; 
     const guests = document.getElementById('guests').value;
 
-    // 1. Kiểm tra ngày
     if(!checkinVal || !checkoutVal) {
         alert("Vui lòng chọn ngày Check-in và Check-out trên lịch!");
         return;
     }
 
-    // 2. Tính số ngày đêm
     const d1 = new Date(checkinVal);
     const d2 = new Date(checkoutVal);
     const nights = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
@@ -549,18 +546,15 @@ form.addEventListener('submit', async (e) => {
     
     const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày (trong ngày)";
 
-    // 3. Định dạng ngày Việt Nam
     const formatVN = (dateStr) => dateStr.split('-').reverse().join('/');
     const checkinDisplay = formatVN(checkinVal);
     const checkoutDisplay = formatVN(checkoutVal);
 
-    // 4. Mã Booking
     let currentCounter = parseInt(localStorage.getItem('ss_booking_counter') || "1000");
     currentCounter += 1;
     localStorage.setItem('ss_booking_counter', currentCounter);
     const bookingCode = `SS${currentCounter}`;
 
-    // 5. Gửi API (Giữ nguyên logic của bạn)
     try {
       fetch(API_URL, { 
         method:'POST', 
@@ -572,27 +566,30 @@ form.addEventListener('submit', async (e) => {
       });
     } catch(err) { console.warn('Lỗi gửi API'); }
 
-    // 6. Hiển thị Popup
     const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
     
     if (confirmText) confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
     if (msgBox) msgBox.value = message;
     
-    // Mở Popup
+    // Mở Popup - Bây giờ ID đã khớp nên chắc chắn sẽ hiện
     if (modal) {
         modal.style.display = 'flex';
     } else {
-        console.error("Không tìm thấy phần tử successModal trong HTML");
+        alert("Lỗi: Vẫn không tìm thấy phần tử có ID là 'modal' trong HTML");
     }
 
   } catch (error) {
     console.error("Lỗi xử lý Form:", error);
+    alert("Có lỗi xảy ra: " + error.message);
   }
 });
+
 // Đóng modal
-closeModal.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
+if (closeModal) {
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+}
 
 // Copy & Mở Zalo
 document.getElementById('copyAndZaloBtn').addEventListener('click', async () => {
