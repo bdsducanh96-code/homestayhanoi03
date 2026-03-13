@@ -473,21 +473,7 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbwGPGMKMG-h6SVBBEJ8RkbEBfmu5OCmH9IWqyxbFjq3PfWrJSes1Tg7OfIJCtarIiIA/exec";
 const ZALO = "0365725659";
-/*
-/* ====== LOGIC AUTO FORMAT NGÀY (DD/MM/YYYY) ====== */
-function formatDatePicker(e) {
-  let v = e.target.value.replace(/\D/g,'').slice(0, 8);
-  if (v.length >= 5) {
-    e.target.value = `${v.slice(0,2)}/${v.slice(2,4)}/${v.slice(4)}`;
-  } else if (v.length >= 3) {
-    e.target.value = `${v.slice(0,2)}/${v.slice(2)}`;
-  } else {
-    e.target.value = v;
-  }
-}
-document.getElementById('checkin').addEventListener('input', formatDatePicker);
-document.getElementById('checkout').addEventListener('input', formatDatePicker);
-*/
+
 /* ====== REVIEWS ====== */
 const reviews = [
   {name: "Chị Thùy Linh", star: 5, text: "Gia đình mình vừa có chuyến đi cuối tuần cực kỳ đáng nhớ. Không gian rộng rãi, thoáng mát, bao quanh là rừng thông xanh mướt."},
