@@ -512,50 +512,53 @@ function renderReviews() {
   });
 }
 renderReviews();
-/* ====== FORM SUBMIT LOGIC (ĐÃ SỬA KHỚP ID 'modal') ====== */
+/* ====== 1. KHAI BÁO BIẾN TOÀN CỤC (PHẢI ĐỂ ĐẦU TIÊN) ====== */
 const form = document.getElementById('bookingForm');
-// Sửa 'successModal' thành 'modal' cho khớp với HTML của bạn
 const modal = document.getElementById('modal'); 
 const msgBox = document.getElementById('msgBox');
 const confirmText = document.getElementById('confirmText');
 const closeModal = document.getElementById('closeModal');
+const copyBtn = document.getElementById('copyAndZaloBtn');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault(); 
-  
-  try {
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const checkinVal = document.getElementById('checkin').value; 
-    const checkoutVal = document.getElementById('checkout').value; 
-    const guests = document.getElementById('guests').value;
-
-    if(!checkinVal || !checkoutVal) {
-        alert("Vui lòng chọn ngày Check-in và Check-out trên lịch!");
-        return;
-    }
-
-    const d1 = new Date(checkinVal);
-    const d2 = new Date(checkoutVal);
-    const nights = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+/* ====== 2. LOGIC SUBMIT FORM (XỬ LÝ CHÍNH) ====== */
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    // Ngăn chặn tuyệt đối việc load lại trang và các sự kiện focus khác
+    e.preventDefault(); 
+    e.stopPropagation(); 
     
-    if (nights < 0) {
-        alert("Ngày Check-out phải sau ngày Check-in!");
-        return;
-    }
-    
-    const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày (trong ngày)";
-
-    const formatVN = (dateStr) => dateStr.split('-').reverse().join('/');
-    const checkinDisplay = formatVN(checkinVal);
-    const checkoutDisplay = formatVN(checkoutVal);
-
-    let currentCounter = parseInt(localStorage.getItem('ss_booking_counter') || "1000");
-    currentCounter += 1;
-    localStorage.setItem('ss_booking_counter', currentCounter);
-    const bookingCode = `SS${currentCounter}`;
-
     try {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const checkinVal = document.getElementById('checkin').value; 
+      const checkoutVal = document.getElementById('checkout').value; 
+      const guests = document.getElementById('guests').value;
+
+      if(!checkinVal || !checkoutVal) {
+          alert("Vui lòng chọn ngày Check-in và Check-out trên lịch!");
+          return;
+      }
+
+      const d1 = new Date(checkinVal);
+      const d2 = new Date(checkoutVal);
+      const nights = Math.round((d2 - d1) / (1000 * 60 * 60 * 24));
+      
+      if (nights < 0) {
+          alert("Ngày Check-out phải sau ngày Check-in!");
+          return;
+      }
+      
+      const stayDurationText = nights > 0 ? `${nights + 1} ngày ${nights} đêm` : "1 ngày (trong ngày)";
+      const formatVN = (dateStr) => dateStr.split('-').reverse().join('/');
+      const checkinDisplay = formatVN(checkinVal);
+      const checkoutDisplay = formatVN(checkoutVal);
+
+      let currentCounter = parseInt(localStorage.getItem('ss_booking_counter') || "1000");
+      currentCounter += 1;
+      localStorage.setItem('ss_booking_counter', currentCounter);
+      const bookingCode = `SS${currentCounter}`;
+
+      // Gửi API (Chạy ngầm không ảnh hưởng đến giao diện)
       fetch(API_URL, { 
         method:'POST', 
         mode:'no-cors', 
@@ -563,43 +566,41 @@ form.addEventListener('submit', async (e) => {
           name, phone, checkin: checkinDisplay, checkout: checkoutDisplay, 
           guests, duration: stayDurationText, code: bookingCode, time: new Date().toISOString()
         })
-      });
-    } catch(err) { console.warn('Lỗi gửi API'); }
+      }).catch(err => console.warn('Lỗi gửi API'));
 
-    const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
-    
-    if (confirmText) confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
-    if (msgBox) msgBox.value = message;
-    
-    // Mở Popup - Bây giờ ID đã khớp nên chắc chắn sẽ hiện
-    if (modal) {
-        modal.style.display = 'flex';
-    } else {
-        alert("Lỗi: Vẫn không tìm thấy phần tử có ID là 'modal' trong HTML");
+      const message = `Chào Homestay, tôi muốn nhận tư vấn:\n\n- Khách hàng: ${name}\n- SĐT: ${phone}\n- Check-in: ${checkinDisplay}\n- Check-out: ${checkoutDisplay}\n- Số khách: ${guests}\n- Lưu trú: ${stayDurationText}\n\nMã: ${bookingCode}`;
+      
+      if (confirmText) confirmText.innerHTML = `<strong>Thông tin đã sẵn sàng!</strong><br>Vui lòng ấn nút bên dưới để gửi qua Zalo.`;
+      if (msgBox) msgBox.value = message;
+      
+      // HIỂN THỊ POPUP
+      if (modal) {
+          modal.style.display = 'flex';
+      } else {
+          alert("Lỗi: Không tìm thấy ID 'modal' trong HTML!");
+      }
+
+    } catch (error) {
+      console.error("Lỗi xử lý Form:", error);
+      alert("Có lỗi xảy ra: " + error.message);
     }
+  });
+}
 
-  } catch (error) {
-    console.error("Lỗi xử lý Form:", error);
-    alert("Có lỗi xảy ra: " + error.message);
-  }
-});
-
-// Đóng modal
+/* ====== 3. ĐÓNG MODAL & COPY ZALO ====== */
 if (closeModal) {
     closeModal.addEventListener('click', () => {
       modal.style.display = 'none';
     });
 }
-/* ====== 1. COPY & MỞ ZALO ====== */
-const copyBtn = document.getElementById('copyAndZaloBtn');
+
 if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
-        const msg = document.getElementById('msgBox');
-        if (msg) {
+        if (msgBox) {
             try { 
-                await navigator.clipboard.writeText(msg.value); 
+                await navigator.clipboard.writeText(msgBox.value); 
             } catch(e) { 
-                msg.select(); 
+                msgBox.select(); 
                 document.execCommand('copy'); 
             }
         }
@@ -607,19 +608,18 @@ if (copyBtn) {
     });
 }
 
-/* ====== 2. LOGIC NÚT ZALO BAY & TỰ ĐỘNG MỞ LỊCH ====== */
+/* ====== 4. ZALO BAY & MỞ LỊCH (DOMContentLoaded) ====== */
 document.addEventListener("DOMContentLoaded", function() {
     const zaloBtn = document.getElementById('floatingZaloBtn');
     const nameInput = document.getElementById('name');
-    const targetForm = document.getElementById('bookingForm'); // Luôn dùng bookingForm
+    const targetForm = document.getElementById('bookingForm');
 
-    // Xử lý nút Zalo bay
     if (zaloBtn) {
         zaloBtn.addEventListener('click', function(e) {
             e.preventDefault();
             if (targetForm) {
                 targetForm.scrollIntoView({ behavior: 'smooth' });
-                // Chỉ hiện thông báo khi bấm thực sự vào nút Zalo bay
+                // Chỉ Alert khi người dùng bấm trực tiếp vào nút bay này
                 setTimeout(function() {
                     alert("Vui lòng điền thông tin vào form dưới đây để chúng tôi tư vấn chi tiết cho bạn nhé!");
                     if (nameInput) nameInput.focus();
@@ -628,27 +628,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Tự động mở bảng chọn ngày (Gộp vào đây cho sạch code)
+    // Tự động mở bảng lịch
     const dateInputs = [document.getElementById('checkin'), document.getElementById('checkout')];
     dateInputs.forEach(input => {
         if (input) {
             input.addEventListener('click', function() {
-                try {
-                    this.showPicker();
-                } catch (err) {
-                    console.log("Trình duyệt không hỗ trợ showPicker");
-                }
+                try { this.showPicker(); } catch (err) {}
             });
-        }
-    });
-});
-  
-dateInputs.forEach(input => {
-    input.addEventListener('click', function() {
-        try {
-            this.showPicker(); // Kích hoạt bảng lịch của trình duyệt
-        } catch (err) {
-            console.log("Trình duyệt không hỗ trợ showPicker");
         }
     });
 });
