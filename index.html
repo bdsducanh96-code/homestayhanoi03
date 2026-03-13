@@ -605,7 +605,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-  
+  // Tự động mở bảng chọn ngày khi click vào ô input
+const dateInputs = [document.getElementById('checkin'), document.getElementById('checkout')];
+
+dateInputs.forEach(input => {
+    input.addEventListener('click', function() {
+        try {
+            this.showPicker(); // Kích hoạt bảng lịch của trình duyệt
+        } catch (err) {
+            console.log("Trình duyệt không hỗ trợ showPicker");
+        }
+    });
+});
 </script>
 </body>
 </html>
