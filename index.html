@@ -130,17 +130,38 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 .floating a { padding: 16px 24px; border-radius: 8px; font-weight: 700; font-size: 15px; }
 
 @media(max-width: 768px) {
-  /* Tối ưu Tiện nghi cho Điện thoại: 2 cột gọn gàng */
+  /* 1. Tối ưu Tiện nghi chung */
   .amenity-list { grid-template-columns: 1fr 1fr; gap: 10px 15px; }
   .amenity-item { font-size: 13.5px; }
   .amenity-item i { width: 24px; font-size: 14px; }
   .amenities-wrapper { padding: 25px 15px; }
-  
-  .feature-row { gap: 30px; margin-bottom: 50px; }
-  .feature-img img { height: 280px; }
+
+  /* 2. Tối ưu Tiện ích & Dịch vụ (CHỈNH SỬA TẠI ĐÂY) */
+  .service-section-title { font-size: 20px; text-align: center; border-left: none; border-bottom: 3px solid var(--accent); padding: 0 0 10px; }
+  .service-grid { 
+    grid-template-columns: 1fr; /* Chuyển về 1 cột duy nhất */
+    gap: 15px; 
+  }
+  .service-card { padding: 15px; border: 1px solid #eee; }
+  .service-img { width: 100px; height: 75px; } /* Thu nhỏ ảnh một chút */
+
+  /* 3. Tối ưu Tiện ích nghỉ dưỡng (CHỈNH SỬA TẠI ĐÂY) */
+  .feature-row, .feature-row:nth-child(even) { 
+    flex-direction: column; /* Luôn xếp chồng dọc: Ảnh trên - Chữ dưới */
+    gap: 20px; 
+    margin-bottom: 40px; 
+    text-align: center; /* Căn giữa văn bản cho cân đối */
+  }
+  .feature-img, .feature-content { flex: none; width: 100%; }
+  .feature-img img { height: 240px; } /* Giảm chiều cao ảnh trên mobile */
+  .feature-title { font-size: 22px; margin-bottom: 10px; }
+  .feature-desc { font-size: 15px; }
+
+  /* 4. Các phần khác */
   .form-row { grid-template-columns: 1fr; gap: 0; }
-  .form-card { padding: 35px 20px; }
+  .form-card { padding: 30px 15px; }
   .gallery-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 36px; }
 }
 </style>
 </head>
@@ -379,7 +400,7 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
     </div>
   </div>
 </section>
-*?
+*/
 <section class="section-padding section-white">
     <div class="container">
       <h2 class="center" style="margin-bottom: 40px; font-weight: 800;">KHÁCH HÀNG NÓI GÌ?</h2>
