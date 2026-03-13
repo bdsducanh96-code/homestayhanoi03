@@ -591,41 +591,42 @@ if (closeModal) {
     });
 }
 
-// Copy & Mở Zalo
-document.getElementById('copyAndZaloBtn').addEventListener('click', async () => {
-  try { 
-    await navigator.clipboard.writeText(msgBox.value); 
-  } catch(e) { 
-    msgBox.select(); 
-    document.execCommand('copy'); 
-  }
-  window.open("https://zalo.me/" + ZALO, "_blank");
-});
+// 1. Copy & Mở Zalo (Giữ nguyên nhưng thêm kiểm tra msgBox)
+const copyBtn = document.getElementById('copyAndZaloBtn');
+if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+        const msg = document.getElementById('msgBox');
+        if (msg) {
+            try { 
+                await navigator.clipboard.writeText(msg.value); 
+            } catch(e) { 
+                msg.select(); 
+                document.execCommand('copy'); 
+            }
+        }
+        window.open("https://zalo.me/" + ZALO, "_blank");
+    });
+}
 
-// Đảm bảo toàn bộ HTML đã tải xong mới chạy code
+// 2. Logic cho nút Zalo bay (Floating Button) - SỬA LẠI ID CHO KHỚP
 document.addEventListener("DOMContentLoaded", function() {
-    
     const zaloBtn = document.getElementById('floatingZaloBtn');
     const nameInput = document.getElementById('name');
-    const targetForm = document.getElementById('form');
+    // SỬA TẠI ĐÂY: Đổi 'form' thành 'bookingForm' cho khớp với ID thực tế của bạn
+    const targetForm = document.getElementById('bookingForm'); 
 
     if (zaloBtn) {
         zaloBtn.addEventListener('click', function(e) {
-            // 1. Ngăn không cho trình duyệt nhảy vèo lên đầu trang/xuống dưới theo cách mặc định
             e.preventDefault();
-
-            // 2. Cuộn xuống form một cách mượt mà bằng JS
             if (targetForm) {
                 targetForm.scrollIntoView({ behavior: 'smooth' });
+                
+                // Chỉ hiện Alert và Focus nếu người dùng nhấn trực tiếp vào nút Zalo bay
+                setTimeout(function() {
+                    alert("Vui lòng điền thông tin vào form dưới đây để chúng tôi tư vấn chi tiết cho bạn nhé!");
+                    if (nameInput) nameInput.focus();
+                }, 500);
             }
-
-            // 3. Đợi cuộn xong thì hiện thông báo và trỏ chuột
-            setTimeout(function() {
-                alert("Vui lòng điền thông tin vào form dưới đây để chúng tôi tư vấn chi tiết cho bạn nhé!");
-                if (nameInput) {
-                    nameInput.focus();
-                }
-            }, 300); // Tăng lên 800ms để chắc chắn đã cuộn xong
         });
     }
 });
