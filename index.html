@@ -429,11 +429,11 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
         <div class="form-row">
           <div class="form-group">
             <label>Ngày Check-in dự kiến (*)</label>
-            <input id="checkin" type="text" placeholder="Gợi ý: 13/04/2026" maxlength="10" required>
+            <input id="checkin" type="date" placeholder="Gợi ý: 13/04/2026" maxlength="10" required>
           </div>
           <div class="form-group">
             <label>Ngày Check-out dự kiến (*)</label>
-            <input id="checkout" type="text" placeholder="Gợi ý: 14/04/2026" maxlength="10" required>
+            <input id="checkout" type="date" placeholder="Gợi ý: 14/04/2026" maxlength="10" required>
           </div>
         </div>
 
@@ -474,17 +474,14 @@ input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px 
 const API_URL = "https://script.google.com/macros/s/AKfycbwGPGMKMG-h6SVBBEJ8RkbEBfmu5OCmH9IWqyxbFjq3PfWrJSes1Tg7OfIJCtarIiIA/exec";
 const ZALO = "0365725659";
 
-/* ====== LOGIC AUTO FORMAT NGÀY (DD/MM/YYYY) ====== */
-function formatDatePicker(e) {
-  let v = e.target.value.replace(/\D/g,'').slice(0, 8);
-  if (v.length >= 5) {
-    e.target.value = `${v.slice(0,2)}/${v.slice(2,4)}/${v.slice(4)}`;
-  } else if (v.length >= 3) {
-    e.target.value = `${v.slice(0,2)}/${v.slice(2)}`;
-  } else {
-    e.target.value = v;
-  }
-}
+// Tự động mở bảng lịch khi click vào ô
+const dateInputs = [document.getElementById('checkin'), document.getElementById('checkout')];
+dateInputs.forEach(input => {
+  input.addEventListener('click', function() {
+    this.showPicker(); 
+  });
+});
+  
 document.getElementById('checkin').addEventListener('input', formatDatePicker);
 document.getElementById('checkout').addEventListener('input', formatDatePicker);
 
@@ -605,18 +602,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-  // Tự động mở bảng chọn ngày khi click vào ô input
-const dateInputs = [document.getElementById('checkin'), document.getElementById('checkout')];
-
-dateInputs.forEach(input => {
-    input.addEventListener('click', function() {
-        try {
-            this.showPicker(); // Kích hoạt bảng lịch của trình duyệt
-        } catch (err) {
-            console.log("Trình duyệt không hỗ trợ showPicker");
-        }
-    });
-});
+ 
 </script>
 </body>
 </html>
